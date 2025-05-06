@@ -89,7 +89,15 @@ node install-helper.js
 | 📖 `/help`                       | Affiche le menu d’aide stylé                                     |
 | 🌐 `/serveur`                    | Statut des serveurs en temps réel                                |
 | 💡 `/conseil`                    | Conseil du jour aléatoire                                        |
+| 🔔 `/notify <message>`           | Notification spéciale (admin)                                    |
+| 📈 `/progress`                   | Affiche votre progression de quêtes                              |
+| ➕ `/addprogress <quête>`         | Ajoute une quête à votre progression                             |
+| 🎯 `/suggestion [style]`         | Conseil personnalisé selon votre style de jeu                    |
+| 🎬 `/youtube`                    | 3 dernières vidéos Gray Zone Warfare sur YouTube                 |
+| 📰 `/reddit`                     | 3 derniers posts du subreddit r/GrayZoneWarfare                  |
 |------------------------------------------------------------------------------------------------------|
+
+---
 
 ## 🎨 Exemple de rendu
 
@@ -108,6 +116,9 @@ Créez un fichier `.env` à la racine du projet avec le contenu suivant :
 ```
 DISCORD_TOKEN=VOTRE_TOKEN_DISCORD
 MISTRAL_API_KEY=VOTRE_CLE_MISTRAL
+CLIENT_ID=VOTRE_CLIENT_ID_DISCORD
+GUILD_ID=VOTRE_GUILD_ID_DISCORD
+YOUTUBE_API_KEY=VOTRE_CLE_API_YOUTUBE
 ```
 
 ---
