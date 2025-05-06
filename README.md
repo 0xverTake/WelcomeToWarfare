@@ -79,32 +79,21 @@ node install-helper.js
 
 ## 📚 Commandes disponibles
 
-| Commande                        | Description                                                      |
-|----------------------------------|------------------------------------------------------------------|
-| ⚡ `!steuff`                     | Astuces pour se steuffer rapidement                              |
-| 💡 `!astuce <question>`          | Obtiens une astuce personnalisée                                 |
-| 🗺️ `!map`                       | Lien vers une map interactive gratuite                           |
-| 🤔 `!mistral <question>`         | Pose n'importe quelle question sur le jeu                        |
-| 📜 `!quete <nom>`                | Toutes les astuces, vidéos, maps pour une quête                  |
-| 📖 `!help`                       | Affiche le menu d’aide stylé                                     |
-| 🚨 `!notify`                     | (Démo) Notification d'événement spécial                          |
-| 📈 `!progress`                   | Affiche votre progression de quêtes                              |
-| ➕ `!addprogress <quête>`         | Ajoute une quête à votre progression                             |
-| 🏆 `!classement`                 | Affiche un classement fictif                                     |
-| 🎯 `!suggestion <style>`         | Suggestion personnalisée selon votre style de jeu                |
-| 🎫 `!ticket <problème>`          | Crée un ticket d'aide ou de bug                                  |
-| 🤖 `!gpt <question>`             | (Démo) Intégration d'une autre IA                                |
-| 🌐 `!lang <fr/en>`               | Change la langue du bot (démo)                                   |
-| / `!slash`                       | Infos sur les commandes slash Discord                            |
-| 🖼️ `!image`                     | Exemple de réponse enrichie avec image                           |
-| 🎲 `!quiz`                       | Lance un mini-quiz                                               |
-| ❓ `!reponse <réponse>`           | Répond au quiz                                                   |
-
----
+| Commande                        | Description                                                       |
+|-----------------------------------|-----------------------------------------------------------------|
+| ⚡ `/steuff`                     | Astuces pour se steuffer rapidement                              |
+| 💡 `/astuce [question]`          | Obtiens une astuce personnalisée                                 |
+| 🗺️ `/map`                        | Lien vers une map interactive gratuite                           |
+| 🤔 `/mistral <question>`         | Pose n'importe quelle question sur le jeu                        |
+| 📜 `/quete <nom>`                | Toutes les astuces, vidéos, maps pour une quête                  |
+| 📖 `/help`                       | Affiche le menu d’aide stylé                                     |
+| 🌐 `/serveur`                    | Statut des serveurs en temps réel                                |
+| 💡 `/conseil`                    | Conseil du jour aléatoire                                        |
+|------------------------------------------------------------------------------------------------------|
 
 ## 🎨 Exemple de rendu
 
-![Aperçu du bot](https://i.imgur.com/4M34hi2.png) <!-- Remplace par une capture réelle si possible -->
+![Aperçu du bot](https://imgur.com/a/ZzyWdr7)
 
 ---
 
@@ -142,3 +131,20 @@ N'hésitez pas à proposer d'autres idées ou à contribuer !
 ---
 
 ## ❤️ Développé avec Discord.js & Mistral AI
+
+## 📝 Description pour Discord
+
+Un assistant intelligent pour **Gray Zone Warfare** sur Discord !  
+Obtenez des astuces, conseils personnalisés, maps interactives, statut serveur, et bien plus grâce à l’IA Mistral.  
+Utilisez simplement les commandes slash `/` pour interagir avec le bot.
+
+## 🖥️ Panel info sur le bot
+
+- **Nom** : Gray Zone Warfare Helper
+- **Fonctionnalités principales** :
+  - Astuces et conseils IA pour progresser dans le jeu
+  - Statut des serveurs en temps réel
+  - Map interactive accessible rapidement
+  - Conseils du jour et aide personnalisée
+  - Interface moderne avec commandes slash Discord
+- **Technos** : Node.js, discord.js, Mistral AI, Docker-ready
