@@ -33,14 +33,30 @@ Obtiens des astuces, des conseils, des maps interactives et bien plus grâce à 
 
 ### Avec Docker
 
-1. Construisez l'image :
+1. Construisez l'image Docker (à la racine du projet) :
    ```
-   docker build -t gzw-bot . 
+   docker build -t gzw-bot .
    ```
 
-2. Lancez le conteneur (remplacez les variables d'environnement) :
+2. Lancez le conteneur avec vos variables d'environnement :
    ```
-   docker run -e DISCORD_TOKEN=VOTRE_TOKEN_DISCORD -e MISTRAL_API_KEY=VOTRE_CLE_MISTRAL gzw-bot
+   docker run -d --name gzw-bot \
+     -e DISCORD_TOKEN=VOTRE_TOKEN_DISCORD \
+     -e MISTRAL_API_KEY=VOTRE_CLE_MISTRAL \
+     -e CLIENT_ID=VOTRE_CLIENT_ID_DISCORD \
+     -e GUILD_ID=VOTRE_GUILD_ID_DISCORD \
+     -e YOUTUBE_API_KEY=VOTRE_CLE_API_YOUTUBE \
+     gzw-bot
+   ```
+
+3. Pour voir les logs du bot :
+   ```
+   docker logs -f gzw-bot
+   ```
+
+4. Pour arrêter et supprimer le conteneur :
+   ```
+   docker stop gzw-bot && docker rm gzw-bot
    ```
 
 ---
@@ -74,6 +90,36 @@ node install-helper.js
 - Création du fichier `.env` si besoin
 - Build et lancement Docker **ou** lancement Node.js natif
 - Logs colorés et icônes pour chaque étape
+
+---
+
+### ❗ Dépannage : Erreur de variables d'environnement
+
+Si vous voyez une erreur du type :
+```
+❌ Une ou plusieurs variables d'environnement sont manquantes (.env). Vérifiez DISCORD_TOKEN, MISTRAL_API_KEY, CLIENT_ID, GUILD_ID.
+```
+ou
+```
+TokenInvalid / 401 Unauthorized
+```
+**Vérifiez les points suivants :**
+- Le fichier `.env` est bien à la racine du projet (même dossier que `bot.js`).
+- Chaque variable est bien renseignée, sans espace ni guillemet autour du `=`.
+- Si vous utilisez Docker, les variables doivent être passées explicitement avec `-e` ou présentes dans le `.env` copié dans l'image.
+- Redémarrez le bot après toute modification du `.env`.
+- Pour Docker, si vous modifiez `.env`, il faut reconstruire l'image ou relancer le conteneur avec les bonnes variables.
+
+**Exemple de contenu correct :**
+```
+DISCORD_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+MISTRAL_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CLIENT_ID=123456789012345678
+GUILD_ID=123456789012345678
+YOUTUBE_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Si le problème persiste, affichez les variables d'environnement dans le code avant le lancement du bot pour vérifier leur chargement.
 
 ---
 
