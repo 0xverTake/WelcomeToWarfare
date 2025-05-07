@@ -76,10 +76,33 @@ async function main() {
   // Vérification .env
   if (!fs.existsSync('.env')) {
     log('warn', 'Fichier .env manquant. Création...', 'yellow');
-    fs.writeFileSync('.env', 'DISCORD_TOKEN=\nMISTRAL_API_KEY=\n');
+    fs.writeFileSync('.env',
+      'DISCORD_TOKEN=\n' +
+      'MISTRAL_API_KEY=\n' +
+      'CLIENT_ID=\n' +
+      'GUILD_ID=\n' +
+      'YOUTUBE_API_KEY=\n'
+    );
     log('info', 'Merci de compléter le fichier .env avec vos clés.', 'cyan');
   } else {
-    log('info', 'Fichier .env détecté.', 'cyan');
+    // Vérifie que toutes les variables sont présentes, sinon les ajoute
+    const envContent = fs.readFileSync('.env', 'utf8');
+    const requiredVars = [
+      'DISCORD_TOKEN',
+      'MISTRAL_API_KEY',
+      'CLIENT_ID',
+      'GUILD_ID',
+      'YOUTUBE_API_KEY'
+    ];
+    let updated = false;
+    requiredVars.forEach(v => {
+      if (!envContent.includes(v + '=')) {
+        fs.appendFileSync('.env', `${v}=\n`);
+        updated = true;
+      }
+    });
+    if (updated) log('info', 'Variables manquantes ajoutées au .env.', 'cyan');
+    else log('info', 'Fichier .env détecté et complet.', 'cyan');
   }
 
   // Docker ou Node.js natif
@@ -91,9 +114,9 @@ async function main() {
       log('docker', 'Suppression d\'un ancien conteneur (si existant)...', 'yellow');
       try { execSync('docker rm -f gzw-bot', { stdio: 'ignore' }); } catch {}
       log('docker', 'Lancement du conteneur Docker...', 'blue');
-      const env = require('dotenv').config().parsed || {};
+      // Utilise --env-file pour passer toutes les variables
       execSync(
-        `docker run -d --name gzw-bot -e DISCORD_TOKEN=${env.DISCORD_TOKEN || ''} -e MISTRAL_API_KEY=${env.MISTRAL_API_KEY || ''} gzw-bot`,
+        `docker run -d --name gzw-bot --env-file .env gzw-bot`,
         { stdio: 'inherit' }
       );
       log('success', 'Bot lancé dans Docker !', 'green');

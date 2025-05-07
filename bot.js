@@ -39,6 +39,12 @@ async function askMistral(prompt) {
     }
 }
 
+// Utilitaire pour tronquer à 1024 caractères (Discord embed field limit)
+function truncateField(text) {
+    if (!text) return '';
+    return text.length > 1024 ? text.slice(0, 1021) + '...' : text;
+}
+
 // Enregistrement des slash commands
 const commands = [
     new SlashCommandBuilder().setName('help').setDescription('Affiche le menu d\'aide'),
@@ -121,7 +127,7 @@ client.on('interactionCreate', async interaction => {
                 .setDescription('Voici quelques conseils pour optimiser ton équipement :\n*(générés par Mistral AI)*');
             const prompt = "Donne-moi des astuces pour se steuffer rapidement dans Gray Zone Warfare.";
             const reply = await askMistral(prompt);
-            embed.addFields([{ name: 'Conseils', value: reply }]);
+            embed.addFields([{ name: 'Conseils', value: truncateField(reply) }]);
             await interaction.reply({ embeds: [embed] });
         }
 
@@ -133,7 +139,7 @@ client.on('interactionCreate', async interaction => {
                 .setDescription(`Question : ${question || 'Aucune question précisée.'}`);
             const prompt = `Donne-moi une astuce pour Gray Zone Warfare : ${question}`;
             const reply = await askMistral(prompt);
-            embed.addFields([{ name: 'Astuce', value: reply }]);
+            embed.addFields([{ name: 'Astuce', value: truncateField(reply) }]);
             await interaction.reply({ embeds: [embed] });
         }
 
@@ -154,7 +160,7 @@ client.on('interactionCreate', async interaction => {
                 .setDescription(`Question : ${question}`);
             const prompt = `Tu es un expert de Gray Zone Warfare. ${question}`;
             const reply = await askMistral(prompt);
-            embed.addFields([{ name: 'Réponse', value: reply }]);
+            embed.addFields([{ name: 'Réponse', value: truncateField(reply) }]);
             await interaction.reply({ embeds: [embed] });
         }
 
@@ -173,7 +179,7 @@ Présente la réponse de façon claire et structurée.
             const embed = new EmbedBuilder()
                 .setColor(0xE67E22)
                 .setTitle(`📜 Astuces pour la quête : ${questName}`)
-                .setDescription(reply)
+                .setDescription(truncateField(reply))
                 .setFooter({ text: 'Gray Zone Warfare Quest Helper', iconURL: client.user.displayAvatarURL() });
 
             await interaction.reply({ embeds: [embed] });
@@ -258,7 +264,7 @@ Présente la réponse de façon claire et structurée.
             const embed = new EmbedBuilder()
                 .setColor(0x1ABC9C)
                 .setTitle('🎯 Suggestion personnalisée')
-                .setDescription(reply);
+                .setDescription(truncateField(reply));
             await interaction.reply({ embeds: [embed] });
         }
 
@@ -280,8 +286,8 @@ Présente la réponse de façon claire et structurée.
                     .setTitle('🎬 Dernières vidéos YouTube - Gray Zone Warfare');
                 items.forEach(video => {
                     embed.addFields({
-                        name: video.snippet.title,
-                        value: `[Voir la vidéo](https://www.youtube.com/watch?v=${video.id.videoId})\n${video.snippet.channelTitle}`
+                        name: truncateField(video.snippet.title),
+                        value: truncateField(`[Voir la vidéo](https://www.youtube.com/watch?v=${video.id.videoId})\n${video.snippet.channelTitle}`)
                     });
                 });
                 await interaction.reply({ embeds: [embed] });
@@ -305,8 +311,8 @@ Présente la réponse de façon claire et structurée.
                     .setTitle('📰 Derniers posts Reddit - r/GrayZoneWarfare');
                 posts.forEach(post => {
                     embed.addFields({
-                        name: post.data.title,
-                        value: `[Voir le post](https://reddit.com${post.data.permalink}) • 👍 ${post.data.ups} • 💬 ${post.data.num_comments}`
+                        name: truncateField(post.data.title),
+                        value: truncateField(`[Voir le post](https://reddit.com${post.data.permalink}) • 👍 ${post.data.ups} • 💬 ${post.data.num_comments}`)
                     });
                 });
                 await interaction.reply({ embeds: [embed] });
